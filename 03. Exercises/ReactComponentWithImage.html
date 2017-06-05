@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Gerry Byrne - ReactJS Components Exercise</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+</head>
+
+<body>
+<div id="contentgoeshere"></div>
+
+<script type="text/babel">
+    class ImageComponentOne extends React.Component{
+        render() {
+            return (
+	           <div>
+                    <h1>Smile Please! </h1>
+					<h2>The photographer is about </h2>
+					<img src='P1010694.jpg' />
+				</div>
+            );
+        }
+    };
+    ReactDOM.render(<ImageComponentOne />, document.getElementById('contentgoeshere'));
+</script>
+</body>
+</html>

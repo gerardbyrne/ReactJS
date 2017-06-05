@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Gerry Byrne - ReactJS Tutorials</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+</head>
+<body>
+    <div id="contentgoeshere"></div>
+    <script type="text/babel">
+        var NameAndCourseDetails = React.createClass({
+            render: function() {
+                return (
+						<div>
+							<h2>{this.props.lecturer} manages the course - {this.props.course}</h2>
+						</div>
+		);
+            }
+        });
+
+        React.render(
+					<div>
+						<NameAndCourseDetails lecturer="Gerry Byrne" course="ReactJS" />
+						<NameAndCourseDetails lecturer="David Wilson" course="Angular 2" />
+						<NameAndCourseDetails lecturer="Dwyer Gorman" course="Emotional Intelligence" />
+						<NameAndCourseDetails lecturer="Gerry Byrne" course="JavaScript" />
+					</div>, 
+					document.getElementById('contentgoeshere'));
+    </script>
+</body>
+</html>

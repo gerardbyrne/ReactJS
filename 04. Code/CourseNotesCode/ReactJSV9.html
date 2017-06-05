@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Gerry Byrne - ReactJS Tutorials</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+</head>
+<body>
+    <div id="contentgoeshere"></div>
+    <script type="text/babel">
+
+    
+        var NameAndCourseDetails = React.createClass({
+
+				getInitialState:function()
+				{
+				return {editing:false};
+				},
+				update: function()
+				{
+					this.setState({editing:true});
+				},
+				remove: function()
+				{
+					alert("Add business logic to the remove function");
+				},
+				save: function()
+				{
+					var val = React.findDOMNode(this.refs.newText).value;
+					console.log('The new text entered is - ' + val);
+					alert(val);
+					this.setState({editing:false});
+				},
+
+            renderNormal: function() {
+                return (
+						<div>
+							<div><textarea defaultValue = {this.props.lecturer}></textarea></div>					
+							<button onClick={this.update}>UPDATE</button>
+							<button onClick={this.remove}>REMOVE</button>
+						</div>
+						);
+            },
+
+			renderForm: function() {
+                return (
+						<div>
+							<textarea ref="newText" defaultValue={this.props.lecturer}></textarea>
+							<button onClick={this.save}>SAVE</button>
+						</div>	
+						);
+            },					
+			render: function() {
+									if(this.state.editing)
+									{
+										return this.renderForm();
+									}
+									else
+									{
+										return this.renderNormal();
+									}
+								}
+        });
+
+		var Board = React.createClass({
+
+			getInitialState: function(){
+				return{
+					 	details:[
+					 				'Gerry Byrne',
+					 				'David Wilson',
+					 				'Dwyer Gorman'
+					 				]
+					  }
+					},
+
+
+			render: function()
+					{
+						return(
+								<div className="Board">
+									{
+										this.state.details.map(function(text, index)
+										{
+										return (<NameAndCourseDetails key={index}>{text}</NameAndCourseDetails>);
+										})
+									}
+
+								</div>
+							  );
+					}
+		});
+
+        React.render(<Board/>,	document.getElementById('contentgoeshere'));
+    </script>
+</body>
+</html>

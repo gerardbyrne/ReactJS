@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Gerry Byrne - ReactJS Tutorials</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/2.4.0/ReactRouter.min.js"></script>
+
+<style>
+        body {
+          background-color: #33BDFF;
+          padding: 20px;
+          margin: 0;
+        }
+        h1, h2, p, ul, li {
+          font-family: Helvetica, Arial, sans-serif;
+        }
+        ul.header li {
+          display: inline;
+          list-style-type: none;
+          margin: 0;
+        }
+        ul.header {
+          background-color: #111;
+          padding: 0;
+        }
+        ul.header li a {
+          color: #FFF;
+          font-weight: bold;
+          text-decoration: none;
+          padding: 20px;
+          display: inline-block;
+        }
+        .content {
+          background-color: #FFFFFF;
+          padding: 20px;
+        }
+        .content h2 {
+          padding: 0;
+          margin: 0;
+        }
+        .content li {
+          margin-bottom: 10px;
+        }
+</style>
+
+</head>
+<body>
+<div id="contentgoeshere"></div>
+<script type="text/babel">
+
+var { Router,
+      Route,
+      IndexRoute,
+      IndexLink,
+      Link } = ReactRouter;
+
+var Home = React.createClass({
+  render: function() {
+      return (
+        <div>
+          <h2>Allstate NI Graduate Application</h2>
+          <p>Allstate Northern Ireland, was established in Belfast in 1999 
+             to provide high quality software development services and business 
+             solutions in support of our U.S. parent's global operations. 
+             The Allstate Corporation is the largest publically held personal 
+             lines property and casualty insurer in America.</p>
+  
+          <p>Allstate Northern Ireland is committed to helping promote IT within 
+             the province with alliances with a number of organisations such as 
+             Invest Northern Ireland, The Department of Employment and Learning, 
+             Sync NI, Catalyst Inc, Letterkenny IT, CSIT and both of the universities 
+             in Northern Ireland, Queen's University Belfast and the University of Ulster.</p>
+        </div>
+      );
+    }
+});
+
+
+    var App = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <h1>React Single Page Application</h1>
+        <ul className="header">
+          <li>React</li>
+          <li>Angular</li>
+          <li>Ember</li>
+          <li>Meteor</li>
+        </ul>
+        <div className="content">
+        {this.props.children}
+
+        </div>
+      </div>
+    )
+  }
+});
+
+
+ReactDOM.render(
+  <Router>
+    <Route path="/" component={App}>
+        <IndexRoute component={Home}/>
+    </Route>
+  </Router>,
+  contentgoeshere
+);
+
+</script>
+</body>
+</html>

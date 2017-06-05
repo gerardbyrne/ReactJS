@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Gerry Byrne - ReactJS Tutorials</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+</head>
+
+<body>
+<div id="contentgoeshere"></div>
+
+<script type="text/jsx">
+    class ImageComponentWithState extends React.Component{
+	constructor(props) 
+	{
+		/*
+		Our component class has a constructor function which is 
+		called when the component is initialised. 
+		During our initialisation the component state is set. 
+		In our example the case liked is set to false.
+		
+		The super function must be called (with the props argument) 
+		for React to prepare the class for rendering.
+		*/
+		
+		super(props);
+		
+		this.state = {liked: false};
+		this.state = {likecounter: 1}
+		this.toggleLiked = this.toggleLiked.bind(this)
+	}
+  
+  /*
+  Our component has another new function called toggleLiked. 
+  When activated the function calls setState on our component and this
+  is where the liked value is toggled (true to false or false to true).
+  */
+  toggleLiked() {
+					this.setState({
+					  liked: !this.state.liked				  
+					});
+					if(this.state.liked)
+					{
+					this.setState({likecounter:this.state.likecounter + 1});
+					alert(this.state.liked + this.state.likecounter );	
+					}
+				}
+	
+        render() {
+		
+		/*
+		Within our component’s render function we have a variable called buttonClass 
+		which is assigned either 'active' or nothing - depending on the liked state.
+		buttonClass is used as a class name on the React button element. 
+		The button also has an onClick event handler which is set to the toggleLiked function. 
+		The onClick handler uses an ES6 arrow syntax which is shorthand for 
+		function(e) { return this.toggleLiked(e)}.
+		*/	
+			const buttonClass = this.state.liked ? 'active' : '';
+			
+            return (
+	           <div className='image'>
+                    <h1>Smile Please! </h1>
+					<h2>The photographer is about </h2>
+					<img src={this.props.src} />
+					<br/>
+					<div className='bar'>
+					  <button onClick={(e) => {this.toggleLiked(e)}} className={buttonClass}>
+						<span><img src='liked.jpg' /></span>
+					  </button>
+					</div>
+					<span><b>{this.props.question}</b></span>
+					<br/>
+					<span><b>{this.props.answer}</b></span>				
+				</div>
+            )
+        }
+    }
+
+class ImageAlbum extends React.Component 
+{
+  render() {
+    const images = this.props.images.map((image) => {
+      return <ImageComponentWithState src={image.imagename} question={image.question} answer={image.answer}/>
+    });
+
+    return (
+      <div className='image-gallery'>
+        {images}
+      </div>
+    );
+  }
+};
+
+const data = [
+  {
+    imagename: 		'P1010694.jpg',
+    question:	'Question - Is Gerry talking too much - as usual???',
+	answer:		'Answer - No one listening as usual - so it makes no difference!!!'
+  },
+  {
+    imagename: 		'P1010682.jpg',
+    question:	'Question - Is Gerry talking too much - as usual???',
+	answer:		'Answer - No one listening as usual - so it makes no difference!!!'
+  },
+  {
+    imagename: 		'P1010680.jpg',
+    question:	'Question - Is Gerry talking too much - as usual???',
+	answer:		'Answer - No one listening as usual - so it makes no difference!!!'
+  }
+];	
+	
+    ReactDOM.render(<ImageAlbum images={data} />, 
+					document.getElementById('contentgoeshere'));
+</script>
+</body>
+</html>

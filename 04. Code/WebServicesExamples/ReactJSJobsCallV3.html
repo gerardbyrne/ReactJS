@@ -1,0 +1,84 @@
+<!-- This site helped
+// https://stackoverflow.com/questions/43598815/react-setstate-of-array-of-objects
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Gerry Byrne - ReactJS API Call Example</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="ReactJSAPICall.js"></script>
+</head>
+
+<body>
+  <div id="contentgoeshere"></div>
+
+  <script type="text/babel">
+  class FirstReactJSProgram extends React.Component{
+    constructor(props){
+      super(props);
+      this.state = {
+        jobs:[],
+      }
+    }
+    componentWillMount(){
+      apijobs.getJobs().then(res =>{
+        this.setState({jobs:res.jobs})
+      })
+      .catch(function(error) {
+                console.log(error);
+            });
+        }
+
+    render() {
+      console.log("Jobs: ", this.state.jobs);
+      return (
+                  <div className="container">
+                              <div className="panel panel-default"  >
+                                             <div className="panel-heading"><h2>CODEPEN.IO JOBS JSON </h2></div>
+                                             <div class="panel-body"><h3>{this.state.jobs.length} - Records Located</h3></div>
+                                             <div>
+              {this.state.jobs.map(jobsreturned => (
+                <div>
+                <table className="table" width="75%" border="1">
+                  <tbody>
+                    <tr className="success">
+                      <td width="25%"><b>Company Name: </b></td>
+                      <td>{jobsreturned.company_name}</td>
+                    </tr>
+                    <tr className="warning">
+                      <td width="25%"><b>Job Term: </b></td>
+                      <td>{jobsreturned.term} </td>
+                    </tr>
+                    <tr className="danger">
+                      <td width="25%"><b>Job Title: </b></td>
+                      <td>{jobsreturned.title}</td>
+                    </tr>
+                    <tr>
+                      <td width="25%"><b>Description: </b></td>
+                      <td>{jobsreturned.description} </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              ))}
+                                             </div>
+                                             <div className="panel-footer">Panel Footer</div>
+                              </div>
+                              </div>
+      );
+    }
+  }
+  ReactDOM.render(<FirstReactJSProgram />, document.getElementById('contentgoeshere'));
+  </script>
+</body>
+</html>

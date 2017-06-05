@@ -1,0 +1,67 @@
+class Photo extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      liked: false
+    }
+  }
+  
+  toggleLiked() {
+    this.setState({
+      liked: !this.state.liked
+    });
+  }
+    
+  render() {
+    
+    const buttonClass = this.state.liked ? 'active' : '';
+    
+    return (
+      <div className='photo'>
+        <img src={this.props.src} />
+
+        <div className='bar'>
+          <button onClick={(e) => {this.toggleLiked(e)}} className={buttonClass}>
+            ♥
+          </button>
+          <span>{this.props.caption}</span>
+        </div>
+      </div>
+    )
+  }
+}
+
+class PhotoGallery extends React.Component {
+
+  render() {
+
+    const photos = this.props.photos.map((photo) => {
+      return <Photo src={photo.url} caption={photo.caption} />
+    });
+
+    return (
+      <div className='photo-gallery'>
+        {photos}
+      </div>
+    );
+  }
+};
+
+const data = [
+  {
+    url: 'http://tinyurl.com/lkevsb9',
+    caption: 'Hong Kong!'
+  },
+  {
+    url: 'http://tinyurl.com/mxkwh56',
+    caption: 'Cows'
+  },
+  {
+    url: 'http://tinyurl.com/nc7jv28',
+    caption: 'Scooters'
+  }
+];
+
+React.render(<PhotoGallery photos={data} />, document.getElementById('app'));

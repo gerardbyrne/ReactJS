@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Gerry Byrne - ReactJS Tutorials</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+    </style>
+</head>
+
+<body>
+  <div className="container">
+  <div className="table-responsive">
+      <center>
+      <table>
+        <tr>
+          <td><img src="citibikeimage.png" alt="citi bike"></img></td>
+          <td><img src="citibikeimagemobile.jpeg" alt="citi bike mobile app"></img></td>
+        </tr>
+      </table>
+      </center>
+
+      <center>
+      <table>
+        <tr><h2 align="center">New York Bikes are available at</h2>
+            <br>
+        </tr>
+      </table>
+      </center>
+    </div>
+  </div>
+  
+    <div id="contentgoeshere"></div>
+  </br>
+
+<script type="text/jsx">
+
+class BikesComponentWithState extends React.Component{
+	constructor(props)
+	{
+		/*
+		Our component class has a constructor function which is
+		called when the component is initialised.
+		During our initialisation the component state is set.
+		In our example the case docksfound is set to 1.
+
+		The super function must be called (with the props argument)
+		for React to prepare the class for rendering.
+		*/
+
+		super(props);
+		this.state = {docksfound: 1}
+	}
+        render() {
+          return (
+        	           <div>
+                     <div className="container">
+                     <div className="table-responsive">
+                     <table className="table table-bordered">
+                         <tr className="danger">
+                            <td width="25%" >
+                  					     <b>Station Name: </b>
+                            </td>
+                            <td>
+                                {this.props.stationName}
+                                <br>Latitude:  {this.props.latitude} and Longitude: {this.props.longitude}</br>
+                            </td>
+                         </tr>
+
+                         <tr className="info">
+                            <td width="25%" >
+                  					     <b>Available Docks: </b>
+                            </td>
+                            <td>
+                                {this.props.availableDocks}
+                            </td>
+                         </tr>
+
+                         <tr className="success">
+                            <td width="25%" >
+                  					     <b>Total Docks: </b>
+                            </td>
+                            <td>
+                                {this.props.totalDocks}
+                            </td>
+                         </tr>
+
+                         <tr className="warning">
+                            <td width="25%" >
+                  					     <b>Last Communication: </b>
+                            </td>
+                            <td>
+                                {this.props.lastCommunicationTime}
+                            </td>
+                         </tr>
+                         <br></br>
+                    </table>
+                    </div>
+                    </div>
+        				      </div>
+                  )
+            }
+    }
+
+class BikeCollection extends React.Component
+{
+  render() {
+    const bikes = this.props.bikes.map((bikes) => {
+      return <BikesComponentWithState stationName           ={bikes.stationName}
+                                      latitude              ={bikes.latitude}
+                                      longitude             ={bikes.longitude}
+                                      availableDocks        ={bikes.availableDocks}
+                                      totalDocks            ={bikes.totalDocks}
+                                      lastCommunicationTime ={bikes.lastCommunicationTime}
+                                      statusValue           ={bikes.statusValue}/>
+                                      });
+
+    return (
+      <div>
+        {bikes}
+      </div>
+    );
+  }
+};
+
+const data = [
+{
+  id:72,
+  stationName:"W 52 St & 11 Ave",
+  availableDocks:32,
+  totalDocks:39,
+  latitude:40.76727216,
+  longitude:-73.99392888,
+  statusValue:"In Service",
+  statusKey:1,
+  availableBikes:6,
+  lastCommunicationTime:"2017-06-03 08:31:00 AM"
+},
+{
+  id:79,
+  stationName:"Franklin St & W Broadway",
+  availableDocks:30,
+  totalDocks:33,
+  latitude:40.71911552,
+  longitude:-74.00666661,
+  statusValue:"In Service",
+  statusKey:1,
+  availableBikes:2,
+  lastCommunicationTime:"2017-06-03 08:31:36 AM"
+},
+{
+  id:82,
+  stationName:"St James Pl & Pearl St",
+  availableDocks:22,
+  totalDocks:27,
+  latitude:40.71117416,
+  longitude:-74.00016545,
+  statusValue:"In Service",
+  statusKey:1,
+  availableBikes:5,
+  lastCommunicationTime:"2017-06-03 08:33:25 AM"
+},
+{
+  id:151,
+  stationName:"Cleveland Pl & Spring St",
+  availableDocks:20,
+  totalDocks:33,
+  latitude:40.722103786686034,
+  longitude:-73.99724900722504,
+  statusValue:"In Service",
+  statusKey:1,
+  availableBikes:11,
+  lastCommunicationTime:"2017-06-03 05:51:53 PM"
+},
+{
+  id:173,
+  stationName:"Broadway & W 49 St",
+  availableDocks:43,
+  totalDocks:51,
+  latitude:40.76068327096592,
+  longitude:-73.9845272898674,
+  statusValue:"In Service",
+  statusKey:1,
+  availableBikes:7,
+  lastCommunicationTime:"2017-06-03 05:52:01 PM"
+}
+];
+
+    ReactDOM.render(<BikeCollection bikes={data} />,
+					document.getElementById('contentgoeshere'));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Gerry Byrne - ReactJS Tutorials</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+</head>
+<body>
+    <div id="contentgoeshere"></div>
+    <script type="text/babel">
+        var CheckBox = React.createClass({
+		getInitialState:function()
+		{
+		return{checked:true}		
+		},	
+		handleChecked:function(){
+		this.setState({checked:!this.state.checked})
+		},		
+			render:function(){
+			var message;
+			if(this.state.checked)
+			{
+				message = 'checked';
+			}
+			else
+			{
+				message = 'not checked';
+			}
+                return (
+						<div>
+							<input type='checkbox' onChange={this.handleChecked} defaultChecked = {this.state.checked}/>Home Insurance
+							<h3>Home Insurance is {message}</h3>
+						</div>
+						);
+            }
+        });
+
+        React.render(<CheckBox/>,document.getElementById('contentgoeshere'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Gerry Byrne - ReactJS Tutorials</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="form-group">
+        <label for="comment">Comment:</label>
+          <textarea class="form-control" rows="5" id="comment">
+          </textarea>
+    </div>
+    <div id="contentgoeshere">
+
+    </div>
+</div>
+
+<script type="text/babel">
+    var CommentBox = React.createClass({
+        render: function() {
+            return (
+                        <div>
+                            <b>This is a Bootstrap Comment Box</b>
+                        </div>
+            );
+        }
+    });
+    ReactDOM.render(<CommentBox />,document.getElementById('contentgoeshere')
+    );
+</script>
+</body>
+</html>
